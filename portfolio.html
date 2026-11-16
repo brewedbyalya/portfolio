@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alya M. Abbas Portfolio</title>
+    <meta name="description" content="Portfolio of Alya M. Abbas, a creative software engineer building intuitive, user-friendly applications with clean, efficient code.">
+    <meta name="theme-color" content="#FFFFFF">
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="container header-container">
-            <a href="#" class="logo"><i class="fas fa-code"></i>Alya<span>Abbas</span></a>
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links">
+            <a href="#" class="logo"><i class="fas fa-code" aria-hidden="true"></i>Alya<span>Abbas</span></a>
+            <button type="button" class="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#automation">Automation</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -27,16 +33,13 @@
 
     <section class="hero">
         <div class="container hero-content">
-            <h1>Alya M. Abbas</h1>
+            <h1>Alya <em>M.</em> Abbas</h1>
             <p>Creative software engineer passionate about building intuitive, user-friendly applications with clean, efficient code.</p>
             <div class="hero-btns">
                 <a href="#projects" class="btn">View My Work</a>
                 <a href="#contact" class="btn btn-outline">Let's Talk</a>
             </div>
         </div>
-        <a href="#about" class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
-        </a>
     </section>
 
 <section id="about" class="about">
@@ -136,13 +139,77 @@
         </div>
     </section>
 
+    <section id="automation" class="automation">
+        <div class="container">
+            <h2 class="section-title">Automation Experience</h2>
+            <div class="automation-container">
+                <div class="automation-card">
+                    <i class="fas fa-bolt" aria-hidden="true"></i>
+                    <h3>Zapier</h3>
+                    <p class="automation-intro">Connecting tools together so repetitive tasks run on their own.</p>
+                    <ul>
+                            <li><strong>HubSpot + Google Calendar:</strong> when someone submits a HubSpot form, they are automatically added to a Google Calendar invite.</li>
+                            <li><strong>Google Sheets:</strong> when someone registers for something, a sheet updates itself. Triggers include HubSpot forms, changes to a HubSpot segment, or a new Stripe payment.</li>
+                            <li><strong>Slack:</strong> alerts sent to a reminder tab or a specific channel, triggered by a sheet update or a new registrant.</li>
+                            <li><strong>HubSpot workflows:</strong> HubSpot workflows only react to internal triggers, so Zapier catches the external trigger first and then enrols the person in the workflow.</li>
+                            <li><strong>Calendly + email:</strong> people who book a meeting automatically receive reminder emails.</li>
+                    </ul>
+                </div>
+
+                <div class="automation-card">
+                    <i class="fab fa-hubspot" aria-hidden="true"></i>
+                    <h3>HubSpot Workflows</h3>
+                    <p class="automation-intro">Automated emails and messaging based on what contacts do.</p>
+                    <ul>
+                            <li><strong>Segments + emails:</strong> when someone enters a segment (often an active one) for the first time, they get an email. Often used when a lead status changes.</li>
+                            <li><strong>Forms + emails:</strong> anyone who fills out a HubSpot form gets a confirmation email.</li>
+                            <li><strong>Webhooks, forms, Twilio template + WhatsApp Business:</strong> a workflow that sent a WhatsApp message to everyone who completed a HubSpot form.</li>
+                            <li><strong>Email sequences:</strong> a series of emails scheduled days apart.</li>
+                    </ul>
+                </div>
+
+                <div class="automation-card">
+                    <i class="fab fa-google" aria-hidden="true"></i>
+                    <h3>Google Apps Script</h3>
+                    <p class="automation-intro">Scripts that replace manual work across Calendar, Sheets and Gmail.</p>
+                    <ul>
+                            <li><strong>Bulk calendar invites:</strong> a sheet lists each panel&rsquo;s title, date, time and attendee emails, and the script creates every invite. The script also sets the description, Google Meet link, location and guest visibility, so speakers and panels no longer need invites created one by one.</li>
+                            <li><strong>Adding guests:</strong> a sheet of emails is added to an existing invite automatically.</li>
+                            <li><strong>Bulk email:</strong> sends emails to a list of addresses without emailing each person by hand.</li>
+                            <li><strong>Removing guests from large invites:</strong> once an invite passes 50 guests, emails can no longer be removed manually, so a script removes them.</li>
+                            <li><strong>Live API data:</strong> pulls data from an API into a Google Sheet.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="projects" class="projects">
         <div class="container">
             <h2 class="section-title">My Projects</h2>
             <div class="projects-container">
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="images/tomagachi.png" alt="tomagachi screenshot">
+                        <img src="images/yunus-files.webp" alt="The Yunus Files screenshot" width="880" height="476" loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <h3>The Yunus Files</h3>
+                        <p>A project I made for fun: a case-file investigation minigame. Search for names, keywords and topics to recover documents, take notes, and connect clues with strings on an evidence board.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML</span>
+                            <span class="project-tag">CSS</span>
+                            <span class="project-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://brewedbyalya.github.io/The-Yunus-Files-Minigame/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Live Demo</a>
+                            <a href="https://github.com/brewedbyalya/The-Yunus-Files-Minigame" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="images/tomagachi.webp" alt="tomagachi screenshot" width="1200" height="564" loading="lazy">
                     </div>
                     <div class="project-info">
                         <h3>Tomagachi Game</h3>
@@ -153,15 +220,15 @@
                             <span class="project-tag">JavaScript</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://brewedbyalya.github.io/javascript-browser-game-tamagotchi-lab/"><i class="fas fa-globe"></i> Live Demo</a>
-                            <a href="https://github.com/brewedbyalya/javascript-browser-game-tamagotchi-lab"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://brewedbyalya.github.io/javascript-browser-game-tamagotchi-lab/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Live Demo</a>
+                            <a href="https://github.com/brewedbyalya/javascript-browser-game-tamagotchi-lab" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="https://github.com/brewedbyalya/HigherLower-BrowserGame/raw/main/assets/screenshot.png" alt="Game screenshot">
+                        <img src="https://github.com/brewedbyalya/HigherLower-BrowserGame/raw/main/assets/screenshot.png" alt="Game screenshot" loading="lazy">
                     </div>
                     <div class="project-info">
                         <h3>HIGHER and LOWER game</h3>
@@ -173,15 +240,15 @@
                             <span class="project-tag">JavaScript</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://brewedbyalya.github.io/HigherLower-BrowserGame/mainpage.html"><i class="fas fa-globe"></i> Live Demo</a>
-                            <a href="https://github.com/brewedbyalya/HigherLower-BrowserGame"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://brewedbyalya.github.io/HigherLower-BrowserGame/mainpage.html" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Live Demo</a>
+                            <a href="https://github.com/brewedbyalya/HigherLower-BrowserGame" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="images/melodrive.png" alt="melodrive screenshot">
+                        <img src="images/melodrive.webp" alt="melodrive screenshot" width="1200" height="516" loading="lazy">
                     </div>
                     <div class="project-info">
                         <h3>Melodrive</h3>
@@ -195,15 +262,15 @@
                             <span class="project-tag">O' Auth</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://customplaylist.onrender.com/"><i class="fas fa-globe"></i> Live Demo</a>
-                            <a href="https://github.com/brewedbyalya/customPlaylist?tab=readme-ov-file"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://customplaylist.onrender.com/" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe" aria-hidden="true"></i> Live Demo</a>
+                            <a href="https://github.com/brewedbyalya/customPlaylist?tab=readme-ov-file" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="images/secondhand.png" alt="market screenshot">
+                        <img src="images/secondhand.webp" alt="market screenshot" width="1200" height="539" loading="lazy">
                     </div>
                     <div class="project-info">
                         <h3>Secondhand market site</h3>
@@ -215,15 +282,15 @@
                             <span class="project-tag">MongoDB</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Hanoodoo7/secondHand-market-front-end"><i class="fab fa-github"></i> Frontend Github</a>
-                            <a href="https://github.com/Hanoodoo7/secondHandMarket-back-end"><i class="fab fa-github"></i> Backend Github</a>
+                            <a href="https://github.com/Hanoodoo7/secondHand-market-front-end" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Frontend Github</a>
+                            <a href="https://github.com/Hanoodoo7/secondHandMarket-back-end" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Backend Github</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-img">
-                        <img src="images/syncstream.png" alt="SyncStream screenshot">
+                        <img src="images/syncstream.webp" alt="SyncStream screenshot" width="1200" height="539" loading="lazy">
                     </div>
                     <div class="project-info">
                         <h3>SyncStream</h3>
@@ -236,7 +303,7 @@
                             <span class="project-tag">Channels</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/brewedbyalya/syncstream"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://github.com/brewedbyalya/syncstream" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -255,23 +322,21 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Bahrain</span>
                         </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>aliya2002mah@gmail.com</span>
+                        <li class="contact-email">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <a href="mailto:aliya2002mah@gmail.com" class="contact-link" id="email-link" aria-haspopup="true" aria-expanded="false">aliya2002mah@gmail.com</a>
+                            <div class="email-menu" id="email-menu" role="menu" hidden>
+                                <button type="button" role="menuitem" data-action="copy"><i class="fas fa-copy" aria-hidden="true"></i> <span>Copy email</span></button>
+                                <a role="menuitem" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=aliya2002mah@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-google" aria-hidden="true"></i> Open in Gmail</a>
+                                <a role="menuitem" href="https://outlook.live.com/mail/0/deeplink/compose?to=aliya2002mah@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-envelope-open" aria-hidden="true"></i> Open in Outlook</a>
+                                <a role="menuitem" href="mailto:aliya2002mah@gmail.com"><i class="fas fa-at" aria-hidden="true"></i> Open in mail app</a>
+                            </div>
                         </li>
                         <li>
-                            <i class="fas fa-phone"></i>
-                            <span>+97339320465</span>
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                            <a href="https://wa.me/97339320465" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Message +97339320465 on WhatsApp">+97339320465</a>
                         </li>
                     </ul>
-                </div>
-                <div class="contact-form">
-                    <form action="https://formspree.io/f/mwprelwb" method="POST">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="_replyto" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -281,12 +346,12 @@
         <div class="container footer-content">
             <div class="footer-logo">Alya <span>M.</span> Abbas</div>
             <div class="social-links">
-                <a href="https://github.com/brewedbyalya"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/alya-abbas2002/"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/brewedbyalya" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/alya-abbas2002/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
             </div>
             <p class="copyright"><i>#BrewedByAlya</i></p>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

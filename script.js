@@ -1,155 +1,108 @@
+const header = document.querySelector('header');
 const menuBtn = document.querySelector('.menu-btn');
 const navLinks = document.querySelector('.nav-links');
-const header = document.querySelector('header');
+const menuIcon = menuBtn.querySelector('i');
 
-menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    menuBtn.querySelector('i').classList.toggle('fa-bars');
-    menuBtn.querySelector('i').classList.toggle('fa-times');
-});
-
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuBtn.querySelector('i').classList.add('fa-bars');
-        menuBtn.querySelector('i').classList.remove('fa-times');
-    });
-});
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
-function animateOnScroll() {
-    const elements = document.querySelectorAll('.skill-category, .project-card, .focus-item');
-    
-    elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-        
-        if (elementPosition < screenPosition) {
-            element.style.opacity = 1;
-            element.style.transform = 'translateY(0)';
-        }
-    });
+// Mobile menu
+function setMenu(open) {
+    navLinks.classList.toggle('active', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuIcon.classList.toggle('fa-bars', !open);
+    menuIcon.classList.toggle('fa-times', open);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.skill-category, .project-card, .focus-item');
-    animatedElements.forEach(element => {
-        element.style.opacity = 0;
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+menuBtn.addEventListener('click', () => setMenu(!navLinks.classList.contains('active')));
+navLinks.addEventListener('click', (e) => {
+    if (e.target.closest('a')) setMenu(false);
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+});
+
+// Header background once the page is scrolled
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 50);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// Reveal cards on scroll. Skill chips pop in one after another.
+// The `js` class (set in <head>) is what hides them, so nothing stays hidden if JS fails.
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
     });
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateSkillItems();
-                observer.unobserve(entry.target);
-            }
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.skill-category, .automation-card, .project-card, .focus-item').forEach((el) => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+});
+
+const skillItems = document.querySelectorAll('.skill-item');
+const skillsSection = document.querySelector('.skills');
+skillItems.forEach((item) => item.classList.add('reveal-pop'));
+
+if (skillsSection) {
+    const skillsObserver = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        skillItems.forEach((item, i) => {
+            setTimeout(() => item.classList.add('is-visible'), i * 60);
         });
-    }, { threshold: 0.5 });
-    
-    const skillsSection = document.querySelector('.skills');
-    if (skillsSection) {
-        observer.observe(skillsSection);
-    }
-    
-    window.addEventListener('scroll', animateOnScroll);
-    setTimeout(animateOnScroll, 500);
-});
+        skillsObserver.disconnect();
+    }, { threshold: 0.2 });
+    skillsObserver.observe(skillsSection);
+}
 
-function animateSkillItems() {
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach((item, index) => {
+// Email popup: copy, Gmail, Outlook or the default mail app.
+// Without JS the link is a plain mailto: link, so it still works.
+const emailLink = document.getElementById('email-link');
+const emailMenu = document.getElementById('email-menu');
+
+if (emailLink && emailMenu) {
+    const emailAddress = 'aliya2002mah@gmail.com';
+    const copyBtn = emailMenu.querySelector('[data-action="copy"]');
+    const copyLabel = copyBtn.querySelector('span');
+
+    const setEmailMenu = (open) => {
+        emailMenu.hidden = !open;
+        emailLink.setAttribute('aria-expanded', String(open));
+    };
+
+    emailLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        setEmailMenu(emailMenu.hidden);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(emailAddress);
+        } catch (err) {
+            const temp = document.createElement('textarea');
+            temp.value = emailAddress;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            temp.remove();
+        }
+        copyLabel.textContent = 'Copied!';
         setTimeout(() => {
-            item.style.opacity = 1;
-            item.style.transform = 'scale(1)';
-        }, index * 100);
+            copyLabel.textContent = 'Copy email';
+            setEmailMenu(false);
+        }, 1200);
     });
-}
 
-const contactForm = document.querySelector('.contact-form form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const nameInput = contactForm.querySelector('input[type="text"]');
-        const emailInput = contactForm.querySelector('input[type="email"]');
-        const messageInput = contactForm.querySelector('textarea');
-        
-        let isValid = true;
-        
-        if (!nameInput.value.trim()) {
-            nameInput.style.borderColor = 'red';
-            isValid = false;
-        } else {
-            nameInput.style.borderColor = '#E2E8F0';
-        }
-        
-        if (!emailInput.value.trim() || !emailInput.value.includes('@')) {
-            emailInput.style.borderColor = 'red';
-            isValid = false;
-        } else {
-            emailInput.style.borderColor = '#E2E8F0';
-        }
-        
-        if (!messageInput.value.trim()) {
-            messageInput.style.borderColor = 'red';
-            isValid = false;
-        } else {
-            messageInput.style.borderColor = '#E2E8F0';
-        }
-        
-        if (isValid) {
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                alert('Thank you for your message! I will get back to you soon.');
-                contactForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
+    emailMenu.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => setEmailMenu(false));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.contact-email')) setEmailMenu(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            setEmailMenu(false);
+            emailLink.focus();
         }
     });
 }
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                menuBtn.querySelector('i').classList.add('fa-bars');
-                menuBtn.querySelector('i').classList.remove('fa-times');
-            }
-            
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach(item => {
-        item.style.opacity = 0;
-        item.style.transform = 'scale(0.8)';
-        item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    });
-});
